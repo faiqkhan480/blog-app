@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {getDetails} from "../actions/actions";
-import {Button, Card, Col, Container, Row} from "react-bootstrap";
+import {Button, Card, Container} from "react-bootstrap";
 
 class Details extends Component {
     componentDidMount() {

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {setDetails, getPosts} from "../actions/actions";
+import {getPosts} from "../actions/actions";
 import {Button, Card, Col, Container, Row} from "react-bootstrap";
 import {NavLink} from "react-router-dom";
 
