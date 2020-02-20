@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import { getPosts } from "../actions/actions";
 import {Button, Card, Col, Container, Row} from "react-bootstrap";
+import {BrowserRouter as Router, NavLink} from "react-router-dom";
 
 class HomePage extends Component{
     componentDidMount() {
@@ -12,7 +13,7 @@ class HomePage extends Component{
         const {posts} = this.props;
         return (
             <div>
-                <Container>
+                <Container className="App">
                     <Row>
                     {posts.map((post, i) => (
                         <Col key={i}>
@@ -20,7 +21,7 @@ class HomePage extends Component{
                                 <Card.Header>User: {post.userId}</Card.Header>
                                 <Card.Body>
                                     <Card.Title>{post.title}</Card.Title>
-                                    <Button variant="link">Details</Button>
+                                    <NavLink to="/details" className="link btn btn-link">Details</NavLink>
                                 </Card.Body>
                                 <Card.Body>
                                     <Button variant="primary" className="m-3">Edit</Button>
