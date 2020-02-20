@@ -7,20 +7,19 @@ export const getPosts = () =>  async dispatch => {
                 type: 'POSTS',
                 payload: res.data,
             })
-            console.log(res, 'axios response getPosts')
+            // console.log(res, 'axios response getPosts')
         })
         .catch(err => {console.log(err, 'from get the posts')})
 };
 
-export const postsDetails = (postId) =>  async dispatch => {
-    // const url = 'https://jsonplaceholder.typicode.com/posts';
-    await axios.get(`https://jsonplaceholder.typicode.com/posts${postId}`)
+export const getDetails = (postId) =>  async dispatch => {
+    await axios.get(`https://jsonplaceholder.typicode.com/posts/${postId}`)
         .then((res) => {
             dispatch({
-                type: 'POSTS',
+                type: 'DETAILS',
                 payload: res.data,
             });
-            console.log(res, 'axios response postsDetails')
+            console.log(res.data, 'axios response postsDetails')
         })
         .catch(err => {console.log(err, 'from get the posts')})
 };

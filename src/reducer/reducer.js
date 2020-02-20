@@ -1,17 +1,19 @@
 const data = {
     post: [],
-    details: []
+    details: {},
 };
 
 export default (state = data, action) => {
     switch (action.type) {
         case 'POSTS':
             return {
+                ...state,
                 post: action.payload,
             };
         case 'DETAILS':
             return {
-                details: action.payload
+                ...state,
+                details: action.payload,
             };
 
         default:
