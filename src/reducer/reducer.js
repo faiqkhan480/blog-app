@@ -1,12 +1,12 @@
 const data = {
-    post: '',
+    post: [],
 };
 
 export default (state = data, action) => {
     switch (action.type) {
         case 'POSTS':
             return {
-                ...state
+                post: action.payload,
             };
 
         default:
