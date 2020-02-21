@@ -1,19 +1,24 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import {getDetails} from "../actions/actions";
-import {Button, Card, Container} from "react-bootstrap";
+import {getDetail} from "../actions/actions";
+import {Button, Card, Container, Spinner} from "react-bootstrap";
 
 class Details extends Component {
     componentDidMount() {
         const id = localStorage.getItem('postId');
-        this.props.dispatch(getDetails(id));
+        this.props.dispatch(getDetail(id));
     }
 
     render() {
-        const {post} = this.props;
+        const {post, loading} = this.props;
+        console.log(loading, 'loading')
         return (
             <Container className="text-center my-5">
-                {post?
+                {loading ?
+                    <Container className="App-Loading">
+                        <Spinner animation="border" variant="primary" style={{width: '9rem', height: '9rem'}}/>
+                    </Container>
+                    :
                     <Card border="info">
                         <Card.Body>
                             <Card.Title>{post.title}</Card.Title>
@@ -25,8 +30,6 @@ class Details extends Component {
                             <Button variant="outline-danger" className="mx-3">Delete</Button>
                         </Card.Body>
                     </Card>
-                    :
-                    <h3>Waiting....</h3>
                 }
             </Container>
         );
@@ -35,7 +38,8 @@ class Details extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        post: state.details
+        post: state.details,
+        loading: state.key,
     }
 }
 
