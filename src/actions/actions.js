@@ -12,15 +12,47 @@ export const getPosts = () =>  async dispatch => {
         .catch(err => {console.log(err, 'from get the posts')})
 };
 
-export const getDetails = (postId) =>  async dispatch => {
+export const getDetail = (postId) =>  async dispatch => {
     await axios.get(`https://jsonplaceholder.typicode.com/posts/${postId}`)
         .then((res) => {
             dispatch({
                 type: 'DETAILS',
                 payload: res.data,
             });
-            console.log(res.data, 'axios response postsDetails')
+            // console.log(res.data, 'axios response postsDetails')
         })
         .catch(err => {console.log(err, 'from get the posts')})
 };
 
+
+export const updatePost = (postId, article, history) =>  async dispatch => {
+    await axios.put(`https://jsonplaceholder.typicode.com/posts/${postId}`, article)
+        .then((res) => {
+            console.log('update post action')
+            dispatch({
+                type: 'UPDATE',
+                payload: res.data,
+            });
+            history.push('/')
+        })
+        .catch(err => {console.log(err, 'from get the posts')})
+};
+
+export const createPost = (data, history) =>  async dispatch => {
+    console.log(data, 'action post')
+    await axios.post('https://jsonplaceholder.typicode.com/posts', data)
+        .then((res) => {
+            console.log('update post action')
+            dispatch({
+                type: 'CREATE',
+                payload: res.data,
+            });
+            history.push('/')
+        })
+        .catch(err => {console.log(err, 'from new the posts')})
+};
+
+export const deletePost = (id) => ({
+    type: 'DEL_ITEMS',
+    payload: id,
+});
