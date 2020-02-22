@@ -15,27 +15,26 @@ export default (state = data, action) => {
             };
         case 'DETAILS':
             return {
-                // ...state,
+                ...state,
                 details: action.payload,
+                loading: false,
                 key: false,
             };
 
         case 'UPDATE':
-            const updatedList = state.data.map((post) => {
-                if(post.id === action.payload.id){
-                    console.log(action.payload, 'console post map=-=-=-');
-                    return action.payload;
-                }
-                return post
-            });
+            const upadated = state.data.map(post => {
+                    if(post.id !== action.payload.id) {
+                        return post;
+                    }
+                    return {...state.data, ...action.payload}
+                });
             return {
-                // ...state,
-                post: updatedList,
-                // loading: true,
+                ...state,
+                post: upadated,
+                key: true,
             };
 
         case 'CREATE':
-            console.log(action.payload, 'action.payload');
             return {
                 ...state,
                 data: [action.payload, ...state.data],

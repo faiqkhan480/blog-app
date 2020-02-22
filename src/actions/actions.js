@@ -9,7 +9,7 @@ export const getPosts = () =>  async dispatch => {
             })
             // console.log(res, 'axios response getPosts')
         })
-        .catch(err => {console.log(err, 'from get the posts')})
+        .catch(err => {console.log(err.message)})
 };
 
 export const getDetail = (postId) =>  async dispatch => {
@@ -21,7 +21,7 @@ export const getDetail = (postId) =>  async dispatch => {
             });
             // console.log(res.data, 'axios response postsDetails')
         })
-        .catch(err => {console.log(err, 'from get the posts')})
+        .catch(err => {console.log(err.message)})
 };
 
 
@@ -35,7 +35,7 @@ export const updatePost = (postId, article, history) =>  async dispatch => {
             });
             history.push('/')
         })
-        .catch(err => {console.log(err, 'from get the posts')})
+        .catch(err => {console.log(err.message)})
 };
 
 export const createPost = (data, history) =>  async dispatch => {
@@ -49,7 +49,7 @@ export const createPost = (data, history) =>  async dispatch => {
             });
             history.push('/')
         })
-        .catch(err => {console.log(err, 'from new the posts')})
+        .catch(err => {console.log(err.message)})
 };
 
 export const deletePost = (id) => ({

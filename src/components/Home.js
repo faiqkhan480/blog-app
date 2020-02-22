@@ -1,15 +1,17 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import {getPosts, deletePost} from "../actions/actions";
-import {Button, Card, Col, Container, Navbar, Row, Spinner} from "react-bootstrap";
+import {Button, Card, Col, Container, Row, Spinner} from "react-bootstrap";
 import {NavLink} from "react-router-dom";
 
 class HomePage extends Component{
     componentDidMount() {
-        console.log(this.props.posts, 'mount')
+        // console.log(this.props.stateKey, 'mount=-=-')
+        // console.log(this.props.posts, 'mount=-=-')
         if (this.props.stateKey) {
             this.props.dispatch(getPosts());
         }
+        console.log(this.props.posts, 'mount=-=-')
     }
 
     setPostId(id) {
@@ -24,7 +26,7 @@ class HomePage extends Component{
         const {posts, loading} = this.props;
         return (
             <div>
-                <Container className="App">
+                <Container>
                     {loading ?
                         <Container className="App-Loading">
                             <Spinner animation="border" variant="primary" style={{width: '9rem', height: '9rem'}}/>
@@ -34,17 +36,17 @@ class HomePage extends Component{
                             {posts.map((post, i) => (
                                 <Col key={i} lg={4} md={6} sm={12} xs={12}>
                                     <Card key={i} border="primary"  className="my-2">
-                                        <Card.Header>User: {post.userId}</Card.Header>
                                         <Card.Body>
                                             <Card.Title>{post.title}</Card.Title>
+                                            <Card.Text>{post.body}</Card.Text>
                                             <NavLink to="/details" onClick={this.setPostId.bind(this, post.id)} className="link btn btn-link">Details</NavLink>
                                             {/*<Button onClick={this.handleDetails.bind(this, post.id)}>Details</Button>*/}
                                         </Card.Body>
 
-                                        <Card.Body>
+                                        <Card.Footer>
                                             <Button href="/form"  onClick={this.setPostId.bind(this, post.id)} variant="primary" className="m-3 w-25">Edit</Button>
-                                            <Button variant="danger" onClick={this.handleDelete.bind(this, post.id)} className="m-3 w-25">Delete</Button>
-                                        </Card.Body>
+                                            <Button variant="danger" onClick={this.handleDelete.bind(this, post.id)} className="ml-3 w-25">Delete</Button>
+                                        </Card.Footer>
                                     </Card>
                                 </Col>
                             ))}

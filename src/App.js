@@ -5,7 +5,6 @@ import HomePage from "./components/Home";
 import Details from "./components/Details";
 import FormPage from "./components/FormPage";
 import Nav from "./components/Navbar";
-import {Button, Container, Navbar} from "react-bootstrap";
 
 class App extends Component{
   render() {

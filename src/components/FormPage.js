@@ -26,27 +26,29 @@ class FormPage extends Component {
         this.setState({[e.target.name] : e.target.value});
     }
 
+    handleUpdate(event) {
+        event.preventDefault();
+        const {history} = this.props;
+        const article = {
+            userId: this.state.userId,
+            title: this.state.title,
+            body: this.state.body,
+        };
+         this.props.dispatch(updatePost(this.state.id, article, history));
+    }
+
     handleSubmit(event) {
         event.preventDefault();
         const {history} = this.props;
-        if(this.state.id) {
-            const article = {
-                userId: this.state.userId,
-                title: this.state.title,
-                body: this.state.body,
-            };
-            this.props.dispatch(updatePost(this.state.id, article, history));
-        } else {
-            const post = {
-                title: this.state.title,
-                body: this.state.body,
-            };
-            this.props.dispatch(createPost(post, history));
-        }
+        const post = {
+            title: this.state.title,
+            body: this.state.body,
+        };
+        this.props.dispatch(createPost(post, history));
     }
 
     render() {
-        const {post, loading} = this.props;
+        const {loading} = this.props;
         const {id, userId, title, body} = this.state;
         return (
             <Container className="text-center my-5">
@@ -55,7 +57,7 @@ class FormPage extends Component {
                         <Spinner animation="border" variant="primary" style={{width: '9rem', height: '9rem'}}/>
                     </Container>
                     :
-                    <Form onSubmit={this.handleSubmit.bind(this)}>
+                    <Form onSubmit={id ? this.handleUpdate.bind(this) : this.handleSubmit.bind(this)}>
                         {id ?
                             <Form.Group>
                                 <Form.Label>User Id</Form.Label>
@@ -90,7 +92,7 @@ class FormPage extends Component {
                                 placeholder="Post" />
                         </Form.Group>
                         <Button variant="primary" type="submit">
-                            Submit
+                            {id ? "Update" : "Submit"}
                         </Button>
                     </Form>
                 }

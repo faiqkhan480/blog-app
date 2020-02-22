@@ -6,12 +6,13 @@ import {Button, Card, Container, Spinner} from "react-bootstrap";
 class Details extends Component {
     componentDidMount() {
         const id = localStorage.getItem('postId');
-        this.props.dispatch(getDetail(id));
+        if(id) {
+            this.props.dispatch(getDetail(id));
+        }
     }
 
     render() {
         const {post, loading} = this.props;
-        console.log(loading, 'loading')
         return (
             <Container className="text-center my-5">
                 {loading ?
@@ -20,15 +21,24 @@ class Details extends Component {
                     </Container>
                     :
                     <Card border="info">
-                        <Card.Body>
-                            <Card.Title>{post.title}</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">User: {post.userId}</Card.Subtitle>
-                            <Card.Text>
-                                {post.body}
-                            </Card.Text>
-                            <Button variant="outline-primary" color="danger" className="mx-3">Edit</Button>
-                            <Button variant="outline-danger" className="mx-3">Delete</Button>
-                        </Card.Body>
+                        {post.id ?
+                            <Card.Body>
+                                <Card.Title>{post.title}</Card.Title>
+                                <Card.Subtitle className="mb-2 text-muted">User: {post.userId}</Card.Subtitle>
+                                <Card.Text>
+                                    {post.body}
+                                </Card.Text>
+                                <Button variant="outline-primary" color="danger" className="mx-3" href="/form">Edit</Button>
+                                <Button variant="outline-danger" className="mx-3">Delete</Button>
+                            </Card.Body>
+                            :
+                            <Card border="info">
+                                <Card.Body>
+                                    <Card.Title>Ops...</Card.Title>
+                                    <Card.Subtitle className="mb-2 text-muted">Post is not exists</Card.Subtitle>
+                                </Card.Body>
+                            </Card>
+                        }
                     </Card>
                 }
             </Container>
@@ -38,6 +48,7 @@ class Details extends Component {
 }
 const mapStateToProps = (state) => {
     return {
+        data: state.data,
         post: state.details,
         loading: state.key,
     }
