@@ -101,7 +101,7 @@ class FormPage extends Component {
     }
 
 }
-const mapStateToProps = ({details, loading}) => {
+const mapStateToProps = ({data, details, loading}) => {
     return {
         post: details,
         loading: loading,

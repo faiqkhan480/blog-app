@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {getDetail} from "../actions/actions";
 import {Button, Card, Container, Spinner} from "react-bootstrap";
+import {NavLink, Link} from "react-router-dom";
 
 class Details extends Component {
     componentDidMount() {
@@ -28,7 +29,9 @@ class Details extends Component {
                                 <Card.Text>
                                     {post.body}
                                 </Card.Text>
-                                <Button variant="outline-primary" color="danger" className="mx-3" href="/form">Edit</Button>
+                                <NavLink to='form'>
+                                    <Button variant="outline-primary" color="danger" className="mx-3">Edit</Button>
+                                </NavLink>
                                 <Button variant="outline-danger" className="mx-3">Delete</Button>
                             </Card.Body>
                             :

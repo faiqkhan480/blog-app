@@ -11,11 +11,12 @@ class HomePage extends Component{
         if (this.props.stateKey) {
             this.props.dispatch(getPosts());
         }
-        console.log(this.props.posts, 'mount=-=-')
+        // console.log(this.props.posts, 'mount=-=-')
     }
 
     setPostId(id) {
-        localStorage.setItem('postId', id)
+        localStorage.setItem('postId', id);
+        this.props.history.push('/form')
     }
 
     handleDelete(id) {
@@ -44,7 +45,7 @@ class HomePage extends Component{
                                         </Card.Body>
 
                                         <Card.Footer>
-                                            <Button href="/form"  onClick={this.setPostId.bind(this, post.id)} variant="primary" className="m-3 w-25">Edit</Button>
+                                            <Button onClick={this.setPostId.bind(this, post.id)} variant="primary" className="button m-3 w-25">Edit</Button>
                                             <Button variant="danger" onClick={this.handleDelete.bind(this, post.id)} className="ml-3 w-25">Delete</Button>
                                         </Card.Footer>
                                     </Card>
